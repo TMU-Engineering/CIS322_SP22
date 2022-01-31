@@ -135,23 +135,18 @@ class Dealer:
 # Create a display output (prints) for multiple player's hands of cards.
 # This should output the hands such that it is unambiguous whose cards are whose.
   def printAllPlayersCards(self, players: PlayerList, printShort: bool = False):
-    # Create a New Player List
-    shuffledPlayerList = PlayerList
 
-    # Shuffle the New Player List
-    random.shuffle(shuffledPlayerList)
-
-    # Loop Through Each Player in the Randomly Shuffled List of Players
-    for key in shuffledPlayerList:
+    # Loop Through Each Player in the List of Players
+    for player in players:
 
       # Prints Player's Cards
       for idx in range(6):
-        for i, card in enumerate(key.hand):
-          if printShort and i < len(key.hand)-1:
-            image = card.shortImage[idx] if key.knownCards[i] else card.cardBack[idx]
+        for i, card in enumerate(player.hand):
+          if printShort and i < len(player.hand)-1:
+            image = card.shortImage[idx] if player.knownCards[i] else card.cardBack[idx]
             print(image, end="")
           else:
-            image = card.image[idx] if key.knownCards[i] else card.cardBack[idx]
+            image = card.image[idx] if player.knownCards[i] else card.cardBack[idx]
             print(image, end="")
         print()
       print("""
