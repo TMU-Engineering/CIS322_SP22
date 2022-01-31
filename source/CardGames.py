@@ -104,6 +104,15 @@ class Player:
     self.hand = []
     self.knownCards = []
 
+  def highCard(self):
+    curr_high=self.hand[0]
+    for i in range(len(self.hand-1):
+       if curr_high < self.hand[i]:
+           curr_high=self.hand[i]
+    return curr_high
+
+            
+
 PlayerList = List[Player]
 
 class Dealer:
