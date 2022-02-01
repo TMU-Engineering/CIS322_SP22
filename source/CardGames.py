@@ -1,5 +1,6 @@
 
 from logging import root
+from operator import attrgetter
 import random
 from typing import List
 import os
@@ -138,4 +139,13 @@ class Dealer:
     for player in players:
       for _ in range(numCards):
         player.addCard(deck.getCard())
-    return True
+    return True 
+
+def findHighCard(CardList):
+    return max(CardList, key=attrgetter('value'))
+
+    #The assignment does not specify whether suits matters in defining "highest". 
+    #If needed, the below function acccounts for suits in Clubs, Diamonds, Hearts, Spades (lowest -> highest) order
+    #It sorts using max because this common suit order is in alphabetical order
+
+    #return max(CardList, key=attrgetter('value', 'suit'))
