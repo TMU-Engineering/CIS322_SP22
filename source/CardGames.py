@@ -31,6 +31,7 @@ class Card:
     return self.suit == other.suit and \
       self.value == other.value
 
+
 CardList = List[Card]
 
 class Deck:
@@ -65,6 +66,9 @@ class Deck:
     self.size = len(deck)
     self.cardBack = cardBack
     self.discarded = []
+
+  def __str__(self):
+      return (cardImages)
 
   def shuffle(self):
     random.shuffle(self.cards)
@@ -104,6 +108,9 @@ class Player:
     self.hand = []
     self.knownCards = []
 
+  def showHand(self):
+    print(self.hand)
+
 PlayerList = List[Player]
 
 class Dealer:
@@ -139,3 +146,27 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+    print(player)
+
+  
+
+
+  def printAllPlayerCards(self):
+    TotalPlayers = [player1, player2, player3]
+    for i in TotalPlayers:
+      self.printPlayerCards(i)
+
+deck1 = Deck()
+player1 = Player("john")
+player2 = Player("jeff")
+player3 = Player("george")
+dealer1 = Dealer()
+
+
+dealer1.dealCards(2, [player1], deck1)
+dealer1.dealCards(3, [player2], deck1)
+dealer1.dealCards(4, [player3], deck1)
+dealer1.printAllPlayerCards()
+  
+
+
