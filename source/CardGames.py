@@ -106,7 +106,7 @@ class Player:
 
   def highCard(self):
     curr_high=self.hand[0]
-    for i in range(len(self.hand-1):
+    for i in range(len(self.hand):
        if curr_high.value < self.hand[i].value:
            curr_high=self.hand[i]
     return curr_high
