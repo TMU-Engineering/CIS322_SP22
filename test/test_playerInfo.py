@@ -1,9 +1,13 @@
 from testing_base import *
 
 def test_PlayerDetails():
-    #testPlayer = Player("Joanna")
-    #testPlayer = Player()
-    #return "Player's name is % s, known cards are % s, and money is % d." % (testPlayer.name, testPlayer.knownCards, testPlayer.money)
-    return PlayerList
+    testPlayer1 = Player("Joanna")
+    testPlayer2 = Player("Peter")
+    testPlayer3 = Player("Chris")
+    testPlayer4 = Player("Jayden")
+    testPlayer5 = Player("Ryan")
 
-test_PlayerDetails()
+    Players = [testPlayer1, testPlayer2, testPlayer3, testPlayer4, testPlayer5]
+
+    for a in Players:
+        print(a)
