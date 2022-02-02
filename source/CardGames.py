@@ -140,7 +140,7 @@ class Dealer:
     for player in players:
 
       # Print the player's name
-      print(player)
+      print(player.name)
 
       # Prints Player's Cards
       for idx in range(6):
