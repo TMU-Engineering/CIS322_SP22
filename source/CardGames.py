@@ -139,6 +139,9 @@ class Dealer:
     # Loop Through Each Player in the List of Players
     for player in players:
 
+      # Print the player's name
+      print(player)
+
       # Prints Player's Cards
       for idx in range(6):
         for i, card in enumerate(player.hand):
