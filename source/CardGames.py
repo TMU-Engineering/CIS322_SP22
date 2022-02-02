@@ -136,6 +136,7 @@ class Dealer:
 # This should output the hands such that it is unambiguous whose cards are whose.
   def printAllPlayersCards(self, players: PlayerList, printShort: bool = False):
 
+    # Loop Through Each Player in the List of Players
     for player in players:
 
       # Prints Player's Cards
