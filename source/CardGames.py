@@ -109,7 +109,7 @@ class Player:
     for x in self.hand:
       for y in self.hand:
         if x.value == y.value:
-          if x.__eq__(y)== False:
+          if x.__eq__(y)== False and ([y,x] in pairList) == False:
             pairList.append([x,y])
 
 
