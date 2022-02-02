@@ -243,7 +243,7 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 26-Jan-2022 at 23:40:58 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 25-Jan-2022 at 21:17:07 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Environment</h2>
     <table id="environment">
       <tr>
@@ -262,8 +262,8 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
         <td>Python</td>
         <td>3.6.3</td></tr></table>
     <h2>Summary</h2>
-    <p>1 tests ran in 0.11 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">0 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>2 tests ran in 0.13 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">0 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">2 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -277,21 +277,18 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
       <tbody class="failed results-table-row">
         <tr>
           <td class="col-result">Failed</td>
-          <td class="col-name">test_cards.py::test_shuffle</td>
-          <td class="col-duration">0.01</td>
+          <td class="col-name">test/test_cards.py::test_shuffle</td>
+          <td class="col-duration">0.00</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log">def test_shuffle():<br/>&gt;       assert compare_shuffled_deck() == 52<br/><span class="error">E       assert 1 == 52</span><br/><span class="error">E        +  where 1 = compare_shuffled_deck()</span><br/><br/>C:\Users\justy\Documents\GitHub\CIS322\test\test_cards.py:19: AssertionError<br/> ------------------------------Captured stdout call------------------------------ <br/> _____  _____  _____  _____  _____ 
-|A .  ||2    ||3    ||4    ||5    |
-| /.\ ||  ^  || ^ ^ || ^ ^ || ^ ^ |
-|(_._)||     ||     ||     ||  ^  |
-|  |  ||  ^  ||  ^  || ^ ^ || ^ ^ |
-|____V||____Z||____E||____h||____S|
- _____  _____  _____  _____  _____ 
-|10 v ||7    ||J  ww||9    ||6    |
-|v v v|| &amp; &amp; || /\{)||v v v|| ^ ^ |
-|v v v||&amp; &amp; &amp;|| \/% ||v v v|| ^ ^ |
-|v v v|| &amp; &amp; ||   % ||v v v|| ^ ^ |
-|___0I||____L||__%%[||____6||____9|
-<br/></div></td></tr></tbody></table></body></html>
+            <div class="log">def test_shuffle():<br/>&gt;       assert compare_shuffled_deck() == 0<br/><span class="error">E       assert 1 == 0</span><br/><span class="error">E        +  where 1 = compare_shuffled_deck()</span><br/><br/>test\test_cards.py:17: AssertionError<br/></div></td></tr></tbody>
+      <tbody class="failed results-table-row">
+        <tr>
+          <td class="col-result">Failed</td>
+          <td class="col-name">test/test_sample.py::test_answer</td>
+          <td class="col-duration">0.00</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log">def test_answer():<br/>&gt;       assert func(3) == 5<br/><span class="error">E       assert 4 == 5</span><br/><span class="error">E        +  where 4 = func(3)</span><br/><br/>test\test_sample.py:5: AssertionError<br/></div></td></tr></tbody></table></body></html>

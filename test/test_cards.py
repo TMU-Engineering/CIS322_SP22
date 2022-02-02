@@ -11,8 +11,11 @@ def compare_shuffled_deck():
     for idx, card in enumerate(ordered_deck.cards):
         if card == shuffled_deck.cards[idx]: num_matches += 1
 
+    dealer.printCards( ordered_deck.cards[:5], True, False)
+    dealer.printCards( shuffled_deck.cards[:5], True, False)
     return num_matches
 
 def test_shuffle():
-    assert compare_shuffled_deck() == 0
+    assert compare_shuffled_deck() == 52
+
 
