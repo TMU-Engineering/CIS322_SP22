@@ -151,6 +151,7 @@ class Dealer:
       print("""
       ------------------------------
       """)
+
   def dealCards(self, numCards: int, players: PlayerList, deck: Deck):
     if numCards * len(players) > deck.size:
       return False
