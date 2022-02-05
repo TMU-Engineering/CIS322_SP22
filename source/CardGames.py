@@ -105,10 +105,13 @@ class Player:
     self.knownCards = []
 
   def info(self):
-    print("Player's name: " + Jacob.name)
-    print(Jacob.name+ "'s money: $"+str(Jacob.money))
-    print(Jacob.name + "'s hand: " + str(Jacob.hand))
-    print(Jacob.name + "'s known hand: " + str(Jacob.knownCards))
+    info=""
+    name = "Player's name: " + self.name
+    money = self.name+ "'s money: $"+str(self.money)
+    hand = self.name + "'s hand: " + str(self.hand)
+    knownHand = self.name + "'s known hand: " + str(self.knownCards)
+    info=info + str(name) + "\n" + str(money) + "\n" + str(hand) + "\n" + str(knownHand)
+    return info
 
 PlayerList = List[Player]
 
@@ -145,3 +148,4 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+    

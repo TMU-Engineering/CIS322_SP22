@@ -2,10 +2,10 @@ from testing_base import *
 
 def PlayerInfo():
     player=Player("Jacob", 200)
-    player_info = ""
-    player_info = player_info + " Player's name: " + player.name + "; Player's money: $" + str(player.money)
-    print(player_info)
-    return player_info
+    player.hand=[1,2,3,4]
+    player.knownCards=[1,2]
+    info=player.info()
+    return info
 
 def test_PlayerInfo():
-    assert PlayerInfo() == "Player's name: Jacob; Player's money: $200"
+    assert "Jacob" in PlayerInfo() and "200" in PlayerInfo() and "[1, 2]" in PlayerInfo() and "[1, 2, 3, 4]" in PlayerInfo()
