@@ -12,9 +12,6 @@ def test_something():
 
 
 
- # dealer1.dealCards(3, [player2], deck1)
- # dealer1.dealCards(4, [player3], deck1)
- # dealer1.printAllPlayerCards_test(players2)
 
 
   
