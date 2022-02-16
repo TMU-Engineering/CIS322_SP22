@@ -1,5 +1,6 @@
 
 from logging import root
+from pickle import FALSE
 import random
 from typing import List
 import os
@@ -112,6 +113,17 @@ class Player:
     self.hand = []
     self.knownCards = []
 
+  def HasPair(self):
+    FoundPair = False
+    for i in range(len(self.hand)):
+      for j in range(i+1, len(self.hand)):
+          x = self.hand[i].value 
+          y = self.hand[j].value 
+          if x == y:
+            FoundPair = True
+    
+    return FoundPair
+
 PlayerList = List[Player]
 
 class Dealer:
@@ -147,3 +159,4 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+
