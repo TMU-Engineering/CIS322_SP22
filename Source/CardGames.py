@@ -104,7 +104,7 @@ class Player:
     self.hand = []
     self.knownCards = []
 
-    PlayerList = List[Player]
+PlayerList = List[Player]
 
 class Dealer:
   def __init__(self):
