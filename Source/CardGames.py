@@ -120,6 +120,14 @@ class Dealer:
           image = card.image[idx] if showFront else card.cardBack[idx]
           print(image, end="")
       print()
+      
+  def deal_ace(self, Card, player):
+    prevCard = 0
+    for i in player:
+      if ace < 21:
+        ace = 11
+      else:
+        ace = 1
     
   def printPlayerCards(self, player: Player, printShort: bool = False):
     for idx in range(6):
