@@ -25,6 +25,7 @@ class Card:
     for line in self.image:
       self.shortImage.append(line[:4])
 
+
   def __eq__(self, other):
     if not type(other) == Card:
       return False
@@ -66,6 +67,14 @@ class Deck:
     self.cardBack = cardBack
     self.discarded = []
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
@@ -81,7 +90,6 @@ class Player:
     self.hand = []
     self.knownCards = []
     self.money = money
-
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -111,7 +119,31 @@ class Player:
            curr_high=self.hand[i]
     return curr_high.value
 
-            
+  def SumCards(self):
+    Sum=0
+    for i in self.hand:
+      Sum=Sum + i.value
+    return Sum
+
+  def info(self):
+    info=""
+    name = "Player's name: " + self.name
+    money = self.name+ "'s money: $"+str(self.money)
+    hand = self.name + "'s hand: " + str(self.hand)
+    knownHand = self.name + "'s known hand: " + str(self.knownCards)
+    info=info + str(name) + "\n" + str(money) + "\n" + str(hand) + "\n" + str(knownHand)
+    return info
+
+  def getPairs(self):
+    pairList = []
+    for x in self.hand:
+      for y in self.hand:
+        if x.value == y.value:
+          if x.__eq__(y)== False and ([y,x] in pairList) == False:
+            pairList.append([x,y])
+
+
+    return pairList
 
 PlayerList = List[Player]
 
@@ -148,3 +180,5 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+
+  
