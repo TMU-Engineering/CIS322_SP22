@@ -32,6 +32,7 @@ class Card:
     return self.suit == other.suit and \
       self.value == other.value
 
+
 CardList = List[Card]
 
 class Deck:
@@ -153,7 +154,15 @@ class Dealer:
     for player in players:
       for _ in range(numCards):
         player.addCard(deck.getCard())
-    return True 
+    return True
+
+  def printAllPlayerCards_test(self, players: PlayerList):
+  #  TotalPlayers = []
+    for i in players:
+      print( i.name )
+      self.printPlayerCards(i)
+      print( '--------------------------')
+  
 
 def findHighCard(CardList):
     return max(CardList, key=attrgetter('value'))
