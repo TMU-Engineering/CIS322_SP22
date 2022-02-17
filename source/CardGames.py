@@ -82,6 +82,11 @@ class Player:
     self.knownCards = []
     self.money = money
 
+
+  def __str__(self):
+    return "Player's name is % s, known cards are % s, and money is % d." % (self.name, self.knownCards, self.money)
+    
+
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -105,6 +110,7 @@ class Player:
     self.knownCards = []
 
 PlayerList = List[Player]
+
 
 class Dealer:
   def __init__(self):
@@ -139,3 +145,11 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+
+
+"""
+PlayerA = Player("Joanna")
+PlayerB = Player("Johnson")
+PlayerC = Player("Samantha")
+print(PlayerA, PlayerB, PlayerC) 
+"""

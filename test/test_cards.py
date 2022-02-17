@@ -16,3 +16,6 @@ def compare_shuffled_deck():
 def test_shuffle():
     assert compare_shuffled_deck() == 0
 
+#def playerList():
+    
+
