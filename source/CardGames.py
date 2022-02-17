@@ -112,6 +112,17 @@ class Player:
     self.hand = []
     self.knownCards = []
 
+  def getPairs(self):
+    pairList = []
+    for x in self.hand:
+      for y in self.hand:
+        if x.value == y.value:
+          if x.__eq__(y)== False and ([y,x] in pairList) == False:
+            pairList.append([x,y])
+
+
+    return pairList
+
 PlayerList = List[Player]
 
 class Dealer:
