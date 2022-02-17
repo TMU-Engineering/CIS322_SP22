@@ -147,32 +147,12 @@ class Dealer:
         player.addCard(deck.getCard())
     return True
 
-
-  
-# NEW CODE BELOW
-
   def printAllPlayerCards_test(self, players: PlayerList):
   #  TotalPlayers = []
     for i in players:
+      print( i.name )
       self.printPlayerCards(i)
-
-
-# COMMENTED OUT SETUP CODE      
-"""
-deck1 = Deck()
-player1 = Player("john")
-player2 = Player("jeff")
-player3 = Player("george")
-players2 = [player1, player2, player3]
-dealer1 = Dealer()
-
-
-dealer1.dealCards(2, [player1], deck1)
-dealer1.dealCards(3, [player2], deck1)
-dealer1.dealCards(4, [player3], deck1)
-dealer1.printAllPlayerCards_test(players2)
-
-"""
+      print( '--------------------------')
   
 
 
