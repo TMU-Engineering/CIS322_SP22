@@ -25,6 +25,7 @@ class Card:
     for line in self.image:
       self.shortImage.append(line[:4])
 
+
   def __eq__(self, other):
     if not type(other) == Card:
       return False
@@ -89,7 +90,6 @@ class Player:
     self.hand = []
     self.knownCards = []
     self.money = money
-
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -111,6 +111,12 @@ class Player:
   def clearHand(self):
     self.hand = []
     self.knownCards = []
+
+  def SumCards(self):
+    Sum=0
+    for i in self.hand:
+      Sum=Sum + i.value
+    return Sum
 
   def info(self):
     info=""
@@ -167,4 +173,4 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
-    
+
