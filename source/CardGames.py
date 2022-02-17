@@ -105,9 +105,9 @@ class Player:
     self.knownCards = []
 
   def sumOfCards(self):
-    total = self.hand[0]
-    for i in range(len(self.hand-1):
-        total == total + self.hand[i]:
+    total = self.hand[0].value
+    for i in range(1,len(self.hand)):
+        total = total + self.hand[i].value
     return total
 
 PlayerList = List[Player]
