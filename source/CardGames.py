@@ -67,6 +67,14 @@ class Deck:
     self.cardBack = cardBack
     self.discarded = []
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
@@ -104,6 +112,12 @@ class Player:
   def clearHand(self):
     self.hand = []
     self.knownCards = []
+
+  def sumOfCards(self):
+    total = self.hand[0].value
+    for i in range(1,len(self.hand)):
+        total = total + self.hand[i].value
+    return total
 
 PlayerList = List[Player]
 
@@ -149,3 +163,4 @@ def findHighCard(CardList):
     #It sorts using max because this common suit order is in alphabetical order
 
     #return max(CardList, key=attrgetter('value', 'suit'))
+
