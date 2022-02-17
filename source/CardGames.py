@@ -66,6 +66,14 @@ class Deck:
     self.cardBack = cardBack
     self.discarded = []
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
@@ -112,6 +120,17 @@ class Player:
     knownHand = self.name + "'s known hand: " + str(self.knownCards)
     info=info + str(name) + "\n" + str(money) + "\n" + str(hand) + "\n" + str(knownHand)
     return info
+
+  def getPairs(self):
+    pairList = []
+    for x in self.hand:
+      for y in self.hand:
+        if x.value == y.value:
+          if x.__eq__(y)== False and ([y,x] in pairList) == False:
+            pairList.append([x,y])
+
+
+    return pairList
 
 PlayerList = List[Player]
 
