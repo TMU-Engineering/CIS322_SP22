@@ -43,3 +43,6 @@ def test_find_card():
 def test_shuffle():
     assert compare_shuffled_deck() < 52
 
+#def playerList():
+    
+
