@@ -92,6 +92,11 @@ class Player:
     self.knownCards = []
     self.money = money
 
+
+  def __str__(self):
+    return "Player's name is % s, known cards are % s, and money is % d." % (self.name, self.knownCards, self.money)
+    
+
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -121,6 +126,7 @@ class Player:
     return total
 
 PlayerList = List[Player]
+
 
 class Dealer:
   def __init__(self):
@@ -157,7 +163,6 @@ class Dealer:
     return True
 
   def printAllPlayerCards_test(self, players: PlayerList):
-  #  TotalPlayers = []
     for i in players:
       print( i.name )
       self.printPlayerCards(i)
@@ -167,9 +172,7 @@ class Dealer:
 def findHighCard(CardList):
     return max(CardList, key=attrgetter('value'))
 
-    #The assignment does not specify whether suits matters in defining "highest". 
     #If needed, the below function acccounts for suits in Clubs, Diamonds, Hearts, Spades (lowest -> highest) order
     #It sorts using max because this common suit order is in alphabetical order
 
     #return max(CardList, key=attrgetter('value', 'suit'))
-

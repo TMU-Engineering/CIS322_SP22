@@ -43,3 +43,6 @@ def test_find_card():
     assert( valid )
 
 
+#def playerList():
+    
+
