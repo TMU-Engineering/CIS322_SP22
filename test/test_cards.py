@@ -13,8 +13,6 @@ def compare_shuffled_deck():
 
     return num_matches
 
-# def test_shuffle():
-#     assert compare_shuffled_deck() == 0
 
 def test_find_card():
     deck = Deck()
@@ -42,6 +40,8 @@ def test_find_card():
 
     assert( valid )
 
+def test_shuffle():
+    assert compare_shuffled_deck() < 52
 
 #def playerList():
     
