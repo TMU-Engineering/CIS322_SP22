@@ -31,6 +31,11 @@ class Card:
     return self.suit == other.suit and \
       self.value == other.value
 
+  def setValue(self):
+    if self.value > 10:
+      self.value = 10
+    return self.value    
+
 CardList = List[Card]
 
 class Deck:
