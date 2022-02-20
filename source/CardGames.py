@@ -104,6 +104,12 @@ class Player:
     self.hand = []
     self.knownCards = []
 
+  def SumCards(self):
+    Sum=0
+    for i in self.hand:
+      Sum=Sum + i.value
+    return Sum
+
   def info(self):
     info=""
     name = "Player's name: " + self.name
@@ -148,4 +154,8 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+
+
+
+      
     
