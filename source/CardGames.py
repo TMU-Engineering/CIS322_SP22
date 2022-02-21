@@ -25,6 +25,7 @@ class Card:
     for line in self.image:
       self.shortImage.append(line[:4])
 
+
   def __eq__(self, other):
     if not type(other) == Card:
       return False
@@ -66,6 +67,14 @@ class Deck:
     self.cardBack = cardBack
     self.discarded = []
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
@@ -81,7 +90,6 @@ class Player:
     self.hand = []
     self.knownCards = []
     self.money = money
-
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -119,6 +127,17 @@ class Player:
     info=info + str(name) + "\n" + str(money) + "\n" + str(hand) + "\n" + str(knownHand)
     return info
 
+  def getPairs(self):
+    pairList = []
+    for x in self.hand:
+      for y in self.hand:
+        if x.value == y.value:
+          if x.__eq__(y)== False and ([y,x] in pairList) == False:
+            pairList.append([x,y])
+
+
+    return pairList
+
 PlayerList = List[Player]
 
 class Dealer:
@@ -147,6 +166,30 @@ class Dealer:
           print(image, end="")
       print()
 
+# Create a display output (prints) for multiple player's hands of cards.
+# This should output the hands such that it is unambiguous whose cards are whose.
+  def printAllPlayersCards(self, players: PlayerList, printShort: bool = False):
+
+    # Loop Through Each Player in the List of Players
+    for player in players:
+
+      # Print the player's name
+      print(player.name)
+
+      # Prints Player's Cards
+      for idx in range(6):
+        for i, card in enumerate(player.hand):
+          if printShort and i < len(player.hand)-1:
+            image = card.shortImage[idx] if player.knownCards[i] else card.cardBack[idx]
+            print(image, end="")
+          else:
+            image = card.image[idx] if player.knownCards[i] else card.cardBack[idx]
+            print(image, end="")
+        print()
+      print("""
+      ------------------------------
+      """)
+
   def dealCards(self, numCards: int, players: PlayerList, deck: Deck):
     if numCards * len(players) > deck.size:
       return False
@@ -155,7 +198,3 @@ class Dealer:
         player.addCard(deck.getCard())
     return True
 
-
-
-      
-    
