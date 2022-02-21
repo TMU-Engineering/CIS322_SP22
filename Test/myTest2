@@ -1,0 +1,20 @@
+from testing_base import *
+
+def aceTest():
+    one = ('Spade', 8)
+    two = ('ace')
+    
+    num_aces=0
+    non_ace_total=0
+    if num_aces > 0:
+        if non_ace_total + 11 + (num_aces - 1)*1 <= 21:
+            ace_value = 11 + (num_aces - 1)*1
+        else:
+            ace_value = num_aces*1
+    else:
+        ace_value = 0
+        
+    hand_total = non_ace_total + ace_value
+    
+    #Works Cited: https://towardsdatascience.com/python-exercise-calculating-all-possible-values-of-a-hand-of-aces-98a218dbd0f7
+    
