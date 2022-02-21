@@ -1,12 +1,16 @@
 
+from ast import Num
 from logging import root
 import random
 from typing import List
 import os
 
 cardImages = []
-values = list(range(1,14))
+values = list(range('2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King', 'Ace'))
 suits = ["Spades", "Clubs", "Hearts", "Diamonds"]
+
+card_val = {'2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10, 'Jack':10, 'Queen':10, 'King':10, 'Ace':1}
+
 
 def find_root_dir():
   cwd = os.getcwd()
@@ -30,6 +34,9 @@ class Card:
       return False
     return self.suit == other.suit and \
       self.value == other.value
+      
+  def grab_rank(self):
+    return self.rank
 
 CardList = List[Card]
 
@@ -120,14 +127,14 @@ class Dealer:
           image = card.image[idx] if showFront else card.cardBack[idx]
           print(image, end="")
       print()
-      
-  def deal_ace(self, Card, player):
-    prevCard = 0
-    for i in player:
-      if ace < 21:
-        ace = 11
-      else:
-        ace = 1
+        
+  def ace_val(self):
+        the_val = 0
+        for card in self.value:  
+            the_val += card_val[card.grab_rank()]
+        if card.grab_rank() in self.value == 'Ace' and the_val <= 11:
+            the_val = the_val + 10
+        return the_val
     
   def printPlayerCards(self, player: Player, printShort: bool = False):
     for idx in range(6):
@@ -147,3 +154,5 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+  
+  #Works Cited: StackOverflow
