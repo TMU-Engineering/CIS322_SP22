@@ -152,27 +152,24 @@ class Dealer:
 # NEW CODE BELOW
 
   def printAllPlayerCards_test(self, players: PlayerList):
-  #  TotalPlayers = []
     for i in players:
       self.printPlayerCards(i)
 
 
-# COMMENTED OUT SETUP CODE      
-"""
-deck1 = Deck()
-player1 = Player("john")
-player2 = Player("jeff")
-player3 = Player("george")
-players2 = [player1, player2, player3]
-dealer1 = Dealer()
+# SPRINT 2 CODE
 
-
-dealer1.dealCards(2, [player1], deck1)
-dealer1.dealCards(3, [player2], deck1)
-dealer1.dealCards(4, [player3], deck1)
-dealer1.printAllPlayerCards_test(players2)
-
-"""
-  
-
+      
+  def winEvaluation(self, players: PlayerList):
+    winner_list = []  
+    loser_list = []
+    winner_list.append(dealer_total)
+    for u in players:
+      if player_total == dealer_total:
+        winner_list.append(u)
+      if player_total > dealer_total:
+        winner_list.append(u)
+        winner_list.remove(dealer_total)
+      if player_total < dealer_total:
+        loser_list.append(u) 
+      print("All players with the total value of " + max(winner_list) + "win the round.")
 

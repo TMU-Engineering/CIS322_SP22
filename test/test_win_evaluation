@@ -1,0 +1,11 @@
+from testing_base import *
+
+def test_win_eval_function:
+    deck1 = Deck()
+    dealer = Player("john")
+    player2 = Player("jeff")
+    player3 = Player("george")
+
+    dealer1 = Dealer()
+  
+    dealer1.dealCards(2, [player1, player2, player3], deck1)
