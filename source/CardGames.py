@@ -1,4 +1,5 @@
 
+from functools import total_ordering
 from logging import root
 import random
 from typing import List
@@ -104,6 +105,28 @@ class Player:
     self.hand = []
     self.knownCards = []
 
+  def printHandValue(self):
+    totalPoints = 0
+    aces = 0
+
+    for i in self.hand:
+      if int(i.value) > 10:
+        totalPoints += 10
+      elif int(i.value) > 1:
+        totalPoints += int(i.value)
+      
+      if int(i.value) == 1:
+        aces += 1
+    
+    while aces != 0:
+      if totalPoints > 10:
+        totalPoints += 1
+        aces -= 1
+      elif totalPoints <= 10:
+        totalPoints += 11
+        aces -= 1
+    return totalPoints  
+    
 PlayerList = List[Player]
 
 class Dealer:
