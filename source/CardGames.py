@@ -35,7 +35,10 @@ class Card:
   def setValue(self):
     if self.value > 10:
       self.value = 10
-    return self.value
+<<<<<<< HEAD
+=======
+    return self.value    
+>>>>>>> 69ed38f09439329e83b2e89cc0a57ceb82e51204
 
 CardList = List[Card]
 
