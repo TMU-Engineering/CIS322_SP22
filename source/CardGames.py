@@ -1,5 +1,7 @@
 
+from functools import total_ordering
 from logging import root
+from operator import attrgetter
 import random
 from typing import List
 import os
@@ -31,6 +33,10 @@ class Card:
     return self.suit == other.suit and \
       self.value == other.value
 
+  def setValue(self):
+    if self.value > 10:
+      self.value = 10
+    return self.value
 
 CardList = List[Card]
 
@@ -70,6 +76,14 @@ class Deck:
   def __str__(self):
       return (cardImages)
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
@@ -86,6 +100,9 @@ class Player:
     self.knownCards = []
     self.money = money
 
+  def __str__(self):
+    return "Player's name is % s, known cards are % s, and money is % d." % (self.name, self.knownCards, self.money)
+    
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -112,6 +129,46 @@ class Player:
     print(self.hand)
 
 PlayerList = List[Player]
+
+  def printHandValue(self):
+    totalPoints = 0
+    aces = 0
+
+    for i in self.hand:
+      if int(i.value) > 10:
+        totalPoints += 10
+      elif int(i.value) > 1:
+        totalPoints += int(i.value)
+      
+      if int(i.value) == 1:
+        aces += 1
+    
+    while aces != 0:
+      if totalPoints > 10:
+        totalPoints += 1
+        aces -= 1
+      elif totalPoints <= 10:
+        totalPoints += 11
+        aces -= 1
+    return totalPoints  
+    
+
+  def HasPair(self):
+    FoundPair = False
+    for i in range(len(self.hand)):
+      for j in range(i+1, len(self.hand)):
+          x = self.hand[i].value 
+          y = self.hand[j].value 
+          if x == y:
+            FoundPair = True
+    
+    return FoundPair
+
+  def sumOfCards(self):
+    total = self.hand[0].value
+    for i in range(1,len(self.hand)):
+        total = total + self.hand[i].value
+    return total
 
 class Dealer:
   def __init__(self):
@@ -146,18 +203,6 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
-
-
-  
-# NEW CODE BELOW
-
-  def printAllPlayerCards_test(self, players: PlayerList):
-    for i in players:
-      self.printPlayerCards(i)
-
-
-# SPRINT 2 CODE
-
       
   def winEvaluation(self, players: PlayerList):
     winner_list = []  
@@ -173,3 +218,17 @@ class Dealer:
         loser_list.append(u) 
       print("All players with the total value of " + max(winner_list) + "win the round.")
 
+  def printAllPlayerCards_test(self, players: PlayerList):
+    for i in players:
+      print( i.name )
+      self.printPlayerCards(i)
+      print( '--------------------------')
+  
+
+def findHighCard(CardList):
+    return max(CardList, key=attrgetter('value'))
+
+    #If needed, the below function acccounts for suits in Clubs, Diamonds, Hearts, Spades (lowest -> highest) order
+    #It sorts using max because this common suit order is in alphabetical order
+
+    #return max(CardList, key=attrgetter('value', 'suit'))
