@@ -73,6 +73,9 @@ class Deck:
     self.cardBack = cardBack
     self.discarded = []
 
+  def __str__(self):
+      return (cardImages)
+
   def findCard(self, val: int, suit: str, remove: bool=True):
     foundCard = None
     for idx, card in enumerate( self.cards ):
@@ -97,11 +100,9 @@ class Player:
     self.knownCards = []
     self.money = money
 
-
   def __str__(self):
     return "Player's name is % s, known cards are % s, and money is % d." % (self.name, self.knownCards, self.money)
     
-
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -123,6 +124,11 @@ class Player:
   def clearHand(self):
     self.hand = []
     self.knownCards = []
+
+  def showHand(self):
+    print(self.hand)
+
+PlayerList = List[Player]
 
   def printHandValue(self):
     totalPoints = 0
@@ -164,9 +170,6 @@ class Player:
         total = total + self.hand[i].value
     return total
 
-PlayerList = List[Player]
-
-
 class Dealer:
   def __init__(self):
     pass
@@ -200,6 +203,20 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+      
+  def winEvaluation(self, players: PlayerList):
+    winner_list = []  
+    loser_list = []
+    winner_list.append(dealer_total)
+    for u in players:
+      if player_total == dealer_total:
+        winner_list.append(u)
+      if player_total > dealer_total:
+        winner_list.append(u)
+        winner_list.remove(dealer_total)
+      if player_total < dealer_total:
+        loser_list.append(u) 
+      print("All players with the total value of " + max(winner_list) + "win the round.")
 
   def printAllPlayerCards_test(self, players: PlayerList):
     for i in players:
