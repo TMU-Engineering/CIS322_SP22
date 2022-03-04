@@ -1,6 +1,7 @@
 
 from functools import total_ordering
 from logging import root
+from operator import attrgetter
 import random
 from typing import List
 import os
@@ -31,6 +32,7 @@ class Card:
       return False
     return self.suit == other.suit and \
       self.value == other.value
+
 
 CardList = List[Card]
 
@@ -67,6 +69,14 @@ class Deck:
     self.cardBack = cardBack
     self.discarded = []
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
@@ -82,6 +92,11 @@ class Player:
     self.hand = []
     self.knownCards = []
     self.money = money
+
+
+  def __str__(self):
+    return "Player's name is % s, known cards are % s, and money is % d." % (self.name, self.knownCards, self.money)
+    
 
   def addMoney(self, amount: int):
     self.money += amount
@@ -127,7 +142,26 @@ class Player:
         aces -= 1
     return totalPoints  
     
+
+  def HasPair(self):
+    FoundPair = False
+    for i in range(len(self.hand)):
+      for j in range(i+1, len(self.hand)):
+          x = self.hand[i].value 
+          y = self.hand[j].value 
+          if x == y:
+            FoundPair = True
+    
+    return FoundPair
+
+  def sumOfCards(self):
+    total = self.hand[0].value
+    for i in range(1,len(self.hand)):
+        total = total + self.hand[i].value
+    return total
+
 PlayerList = List[Player]
+
 
 class Dealer:
   def __init__(self):
@@ -162,3 +196,18 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+
+  def printAllPlayerCards_test(self, players: PlayerList):
+    for i in players:
+      print( i.name )
+      self.printPlayerCards(i)
+      print( '--------------------------')
+  
+
+def findHighCard(CardList):
+    return max(CardList, key=attrgetter('value'))
+
+    #If needed, the below function acccounts for suits in Clubs, Diamonds, Hearts, Spades (lowest -> highest) order
+    #It sorts using max because this common suit order is in alphabetical order
+
+    #return max(CardList, key=attrgetter('value', 'suit'))
