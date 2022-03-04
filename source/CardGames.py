@@ -1,6 +1,4 @@
 
-from functools import total_ordering
-from logging import root
 from operator import attrgetter
 import random
 from typing import List
@@ -117,9 +115,7 @@ class Player:
   def addCard(self, card: Card, isKnown: bool = True):
     self.hand.append(card)
     if isKnown:
-      self.knownCards.append(True)
-    else:
-      self.knownCards.append(False)
+      self.knownCards.append(card)
 
   def clearHand(self):
     self.hand = []
@@ -128,9 +124,7 @@ class Player:
   def showHand(self):
     print(self.hand)
 
-PlayerList = List[Player]
-
-  def printHandValue(self):
+  def getHandValue(self):
     totalPoints = 0
     aces = 0
 
@@ -150,8 +144,7 @@ PlayerList = List[Player]
       elif totalPoints <= 10:
         totalPoints += 11
         aces -= 1
-    return totalPoints  
-    
+    return totalPoints
 
   def HasPair(self):
     FoundPair = False
@@ -169,6 +162,8 @@ PlayerList = List[Player]
     for i in range(1,len(self.hand)):
         total = total + self.hand[i].value
     return total
+
+PlayerList = List[Player]
 
 class Dealer:
   def __init__(self):
@@ -205,18 +200,20 @@ class Dealer:
     return True
       
   def winEvaluation(self, players: PlayerList):
-    winner_list = []  
-    loser_list = []
-    winner_list.append(dealer_total)
+    winner_list = []
+    high_hand = 0
     for u in players:
-      if player_total == dealer_total:
+      player_hand = u.getHandValue()
+      if player_hand > high_hand and player_hand <= 21:
+        winner_list = []
         winner_list.append(u)
-      if player_total > dealer_total:
+        high_hand = player_hand
+      elif player_hand == high_hand:
         winner_list.append(u)
-        winner_list.remove(dealer_total)
-      if player_total < dealer_total:
-        loser_list.append(u) 
-      print("All players with the total value of " + max(winner_list) + "win the round.")
+
+    if len(winner_list) > 0:
+      print(f"All players with the total value of {winner_list[0].getHandValue()} win the round.")
+    return winner_list
 
   def printAllPlayerCards_test(self, players: PlayerList):
     for i in players:
