@@ -149,7 +149,7 @@ class Dealer:
 
 
   
-# NEW CODE BELOW
+# SPRINT 1 CODE
 
   def printAllPlayerCards_test(self, players: PlayerList):
     for i in players:
@@ -157,7 +157,7 @@ class Dealer:
 
 
 # SPRINT 2 CODE
-
+"""
       
   def winEvaluation(self, players: PlayerList):
     winner_list = []  
@@ -172,4 +172,33 @@ class Dealer:
       if player_total < dealer_total:
         loser_list.append(u) 
       print("All players with the total value of " + max(winner_list) + "win the round.")
+
+"""
+
+
+
+
+
+# SPRINT 3 CODE
+def findCardMatch():
+  
+  
+  for i in range(1):
+
+    player1CardList.append(deck1.getCard())
+    currentCard_int = int(player1CardList[i].value)
+    PrintList = []
+    PrintList.append(player1CardList[i].value)#, player1CardList[i].suit))
+
+    print("Player 1 hand: ", PrintList)
+
+    player2CardList.append(deck1.getCard())
+    currentCard_int = int(player2CardList[i].value)
+    PrintList2 = []
+    PrintList2.append(player2CardList[i].value)#, player2CardList[i].suit))
+
+    
+    print("Player 2 hand: ", PrintList2)
+    if PrintList == PrintList2:
+      print("Match!")
 
