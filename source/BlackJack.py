@@ -2,6 +2,11 @@
 # It is where we will link all the components together
 # and manage the game state.
 import CardGames
+import BlackJackDealer
+import New_Values
+import Player_input
+import print_cards
+import win_evaluation
 
 #from source.CardGames import *
 
@@ -20,22 +25,23 @@ class BlackJack():
 
     # This is where all the game functions including 'runGameLoop()' will be called
     def main(self):
-        print('placeholder1')
-        
+        self.gameDealer.dealCards(2, self.gamePlayer, self.gameDeck)
+        self.gameDealer.dealDealerCards(self.gameDeck)
+
     # This will run the game loop
     def runGameLoop(self):
-        print('placeholder2')
-        print(self)
+        Player_input.Player_input(self.gamePlayer, self.gameDeck, self.gameDealer)
+        self.gameDealer.Dealers_Moves(self.gameDeck)
 
     # This function will handle the game win/loose and display to the user who won
     def endGame(self):
-        print('placeholder3')
+        win_evaluation.evaluation(self.gamePlayer, self.gameDealer)
 
 # This is where the instance of the blackjack game will be made
 deck = CardGames.Deck()
 player = CardGames.Player('Player1', 500)
-dealer = 'placeholder'
-myblackjack = BlackJack(deck, player, dealer, 1000)
+dealer = BlackJackDealer.BlackJackDealer('Dealer', 1000)
+myblackjack = BlackJack(deck, player, dealer, 0)
 
 myblackjack.main()
 myblackjack.runGameLoop()

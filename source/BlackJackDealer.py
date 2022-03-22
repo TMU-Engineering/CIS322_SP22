@@ -1,6 +1,6 @@
-from source.CardGames import *
+import CardGames
 
-class BlackJackDealer:
+class BlackJackDealer(CardGames.Dealer):
   def __init__(self, name, money: int = 0):
     self.hand = []
     self.knownCards = []
@@ -11,7 +11,7 @@ class BlackJackDealer:
       Sum=Sum + i.value
     return Sum
 
-  def addCard(self, card: Card, isKnown: bool = True):
+  def addCard(self, card: CardGames.Card, isKnown: bool = True):
     self.hand.append(card)
     if isKnown:
       self.knownCards.append(True)
@@ -29,8 +29,9 @@ class BlackJackDealer:
           print(image, end="")
       print()
 
-  def dealDealerCards(self, deck: Deck):
+  def dealDealerCards(self, deck: CardGames.Deck):
     self.addCard(deck.getCard())
+    self.addCard(deck.getCard(), False)
     return True
 
   def Dealers_Moves(self, deck):
