@@ -90,6 +90,13 @@ class Deck:
     self.size -= 1
     self.discarded.append(card)
     return card
+  
+  def checkEmptyDeck(self):
+    if self.size == 0:
+        result = True
+    else:
+        result = False
+    return result
 
 class Player:
   def __init__(self, name, money: int = 0):
