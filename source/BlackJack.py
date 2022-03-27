@@ -5,7 +5,6 @@ import CardGames
 import BlackJackDealer
 import New_Values
 import Player_input
-import print_cards
 import win_evaluation
 
 #from source.CardGames import *
@@ -14,7 +13,6 @@ import win_evaluation
 class BlackJack():
     # This is where the games objects and variables will be instantiated
     def __init__(self, gameDeck, gamePlayer, gameDealer, gamePot):
-        print('placeholder0')
         self.gameDeck = gameDeck
         self.gamePlayer = gamePlayer
         self.gameDealer = gameDealer
@@ -25,8 +23,11 @@ class BlackJack():
 
     # This is where all the game functions including 'runGameLoop()' will be called
     def main(self):
-        self.gameDealer.dealCards(2, self.gamePlayer, self.gameDeck)
-        self.gameDealer.dealDealerCards(self.gameDeck)
+        self.gameDeck.shuffle()
+        self.gameDealer.dealCards(2, [self.gamePlayer], self.gameDeck)
+        self.gameDealer.dealDealerCards(self.gameDeck, True)
+        self.gameDealer.dealDealerCards(self.gameDeck, False)
+        self.gameDealer.printDealerCards()
 
     # This will run the game loop
     def runGameLoop(self):

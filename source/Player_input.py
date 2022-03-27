@@ -1,4 +1,5 @@
 import CardGames
+import New_Values
 
 
 def Player_input(player, deck, dealer):
@@ -8,7 +9,7 @@ def Player_input(player, deck, dealer):
 
         #PRINTS USER HAND AND SUM OF CARDS
         dealer.printPlayerCards(player, True)
-        print("\n Your current hand sum is %d" % (player.SumCards()))#Hand_Value(player)
+        print("\n Your current hand sum is %d" % (New_Values.Hand_Value(player)))
 
         
         #Input
