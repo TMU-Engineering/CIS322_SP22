@@ -265,7 +265,24 @@ class Dealer:
 def findHighCard(CardList):
     return max(CardList, key=attrgetter('value'))
 
-    #If needed, the below function acccounts for suits in Clubs, Diamonds, Hearts, Spades (lowest -> highest) order
-    #It sorts using max because this common suit order is in alphabetical order
 
-    #return max(CardList, key=attrgetter('value', 'suit'))
+def findCardMatch(): 
+  
+  for i in range(1):
+
+    player1CardList.append(deck1.getCard())
+    currentCard_int = int(player1CardList[i].value)
+    PrintList = []
+    PrintList.append(player1CardList[i].value)#, player1CardList[i].suit))
+
+    print("Player 1 hand: ", PrintList)
+
+    player2CardList.append(deck1.getCard())
+    currentCard_int = int(player2CardList[i].value)
+    PrintList2 = []
+    PrintList2.append(player2CardList[i].value)#, player2CardList[i].suit))
+
+    
+    print("Player 2 hand: ", PrintList2)
+    if PrintList == PrintList2:
+      print("Match!")
