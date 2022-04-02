@@ -1,5 +1,6 @@
 
-from logging import root
+from ast import Break
+from operator import attrgetter
 import random
 from typing import List
 import os
@@ -31,6 +32,10 @@ class Card:
     return self.suit == other.suit and \
       self.value == other.value
 
+  def setValue(self):
+    if self.value > 10:
+      self.value = 10
+    return self.value
 
 CardList = List[Card]
 
@@ -70,14 +75,29 @@ class Deck:
   def __str__(self):
       return (cardImages)
 
+  def findCard(self, val: int, suit: str, remove: bool=True):
+    foundCard = None
+    for idx, card in enumerate( self.cards ):
+      if card.suit == suit and card.value == val:
+        foundCard = self.cards.pop(idx) if remove else card
+        break
+    return foundCard
+
   def shuffle(self):
     random.shuffle(self.cards)
 
-  def getCard(self):
+  def getCard(self) -> Card:
     card = self.cards.pop()
     self.size -= 1
     self.discarded.append(card)
     return card
+  
+  def checkEmptyDeck(self):
+    if self.size == 0:
+        result = True
+    else:
+        result = False
+    return result
 
 class Player:
   def __init__(self, name, money: int = 0):
@@ -86,6 +106,9 @@ class Player:
     self.knownCards = []
     self.money = money
 
+  def __str__(self):
+    return "Player's name is % s, known cards are % s, and money is % d." % (self.name, self.knownCards, self.money)
+    
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -100,16 +123,85 @@ class Player:
   def addCard(self, card: Card, isKnown: bool = True):
     self.hand.append(card)
     if isKnown:
-      self.knownCards.append(True)
-    else:
-      self.knownCards.append(False)
+      self.knownCards.append(card)
 
   def clearHand(self):
     self.hand = []
     self.knownCards = []
 
   def showHand(self):
-    print(self.hand)
+    for idx in range(6):
+      for i, card in enumerate(self.hand):
+        if i < len(self.hand)-1:
+          image = card.shortImage[idx]
+          print(image, end="")
+        else:
+          image = card.image[idx]
+          print(image, end="")
+      print()
+
+  def getHandValue(self):
+    totalPoints = 0
+    aces = 0
+
+    for i in self.hand:
+      if int(i.value) > 10:
+        totalPoints += 10
+      elif int(i.value) > 1:
+        totalPoints += int(i.value)
+      
+      if int(i.value) == 1:
+        aces += 1
+    
+    while aces != 0:
+      if totalPoints > 10:
+        totalPoints += 1
+        aces -= 1
+      elif totalPoints <= 10:
+        totalPoints += 11
+        aces -= 1
+    return totalPoints
+
+  def HasPair(self):
+    FoundPair = False
+    for i in range(len(self.hand)):
+      for j in range(i+1, len(self.hand)):
+          x = self.hand[i].value 
+          y = self.hand[j].value 
+          if x == y:
+            FoundPair = True
+    
+    return FoundPair
+
+  def sumOfCards(self):
+    total = self.hand[0].value
+    for i in range(1,len(self.hand)):
+        total = total + self.hand[i].value
+    return total
+
+  def HitorStand(self, deck: Deck ):
+    while self.sumOfCards() < 21:
+        decision = input("Do you want to hit? (Yes or No)")
+
+        "This is the decision for Hit or Stand"
+        if  decision == 'Yes':
+            print("You have selected HIT")
+            new_card = deck.getCard()
+            self.addCard(new_card, True)
+            print("Your hand is:")
+            self.showHand()
+            print(f"The total of your hand is: {self.sumOfCards()}")
+            
+
+        if decision == 'No':
+          print("STAND")
+          self.showHand()
+          print(f"The total of your hand is: {self.sumOfCards()}")
+
+          break
+
+
+
 
 PlayerList = List[Player]
 
@@ -146,42 +238,35 @@ class Dealer:
       for _ in range(numCards):
         player.addCard(deck.getCard())
     return True
+      
+  def winEvaluation(self, players: PlayerList):
+    winner_list = []
+    high_hand = 0
+    for u in players:
+      player_hand = u.getHandValue()
+      if player_hand > high_hand and player_hand <= 21:
+        winner_list = []
+        winner_list.append(u)
+        high_hand = player_hand
+      elif player_hand == high_hand:
+        winner_list.append(u)
 
-
-  
-# SPRINT 1 CODE
+    if len(winner_list) > 0:
+      print(f"All players with the total value of {winner_list[0].getHandValue()} win the round.")
+    return winner_list
 
   def printAllPlayerCards_test(self, players: PlayerList):
     for i in players:
+      print( i.name )
       self.printPlayerCards(i)
-
-
-# SPRINT 2 CODE
-"""
-      
-  def winEvaluation(self, players: PlayerList):
-    winner_list = []  
-    loser_list = []
-    winner_list.append(dealer_total)
-    for u in players:
-      if player_total == dealer_total:
-        winner_list.append(u)
-      if player_total > dealer_total:
-        winner_list.append(u)
-        winner_list.remove(dealer_total)
-      if player_total < dealer_total:
-        loser_list.append(u) 
-      print("All players with the total value of " + max(winner_list) + "win the round.")
-
-"""
-
-
-
-
-
-# SPRINT 3 CODE
-def findCardMatch():
+      print( '--------------------------')
   
+
+def findHighCard(CardList):
+    return max(CardList, key=attrgetter('value'))
+
+
+def findCardMatch(): 
   
   for i in range(1):
 
@@ -201,4 +286,3 @@ def findCardMatch():
     print("Player 2 hand: ", PrintList2)
     if PrintList == PrintList2:
       print("Match!")
-
