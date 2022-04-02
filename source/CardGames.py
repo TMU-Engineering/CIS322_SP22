@@ -1,4 +1,5 @@
 
+from ast import Break
 from operator import attrgetter
 import random
 from typing import List
@@ -85,7 +86,7 @@ class Deck:
   def shuffle(self):
     random.shuffle(self.cards)
 
-  def getCard(self):
+  def getCard(self) -> Card:
     card = self.cards.pop()
     self.size -= 1
     self.discarded.append(card)
@@ -122,7 +123,15 @@ class Player:
     self.knownCards = []
 
   def showHand(self):
-    print(self.hand)
+    for idx in range(6):
+      for i, card in enumerate(self.hand):
+        if i < len(self.hand)-1:
+          image = card.shortImage[idx]
+          print(image, end="")
+        else:
+          image = card.image[idx]
+          print(image, end="")
+      print()
 
   def getHandValue(self):
     totalPoints = 0
@@ -162,6 +171,30 @@ class Player:
     for i in range(1,len(self.hand)):
         total = total + self.hand[i].value
     return total
+
+  def HitorStand(self, deck: Deck ):
+    while self.sumOfCards() < 21:
+        decision = input("Do you want to hit? (Yes or No)")
+
+        "This is the decision for Hit or Stand"
+        if  decision == 'Yes':
+            print("You have selected HIT")
+            new_card = deck.getCard()
+            self.addCard(new_card, True)
+            print("Your hand is:")
+            self.showHand()
+            print(f"The total of your hand is: {self.sumOfCards()}")
+            
+
+        if decision == 'No':
+          print("STAND")
+          self.showHand()
+          print(f"The total of your hand is: {self.sumOfCards()}")
+
+          break
+
+
+
 
 PlayerList = List[Player]
 
