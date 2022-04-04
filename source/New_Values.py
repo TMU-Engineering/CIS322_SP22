@@ -2,6 +2,10 @@ from CardGames import *
 def Hand_Value(player):
   hand=player.hand
   hand_value=0
+  values=[]
+  for i in self.hand:
+    values.append(i.value)
+  values.sort()
   for card in hand:
     value=card.value
     if value in [2,3,4,5,6,7,8,9,10]: #If the card is 2, 3, 4, 5, 6, 7, 8, 9, 10, then the card value is it's current value.
