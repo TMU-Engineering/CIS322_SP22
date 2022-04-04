@@ -90,15 +90,23 @@ class Player:
     self.hand = []
     self.knownCards = []
     self.money = money
+    self.bet=0
+    
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
 
-  def makeBet(self, amount: int):
+  def makeBet(self, amount: int, betting):
     if amount > self.money:
       print("%s does not have enough money to make this bet." % self.name)
       return self.money
-    self.money -= amount
+    if amount == betting.bet or amount >= (betting.bet*2):
+      self.money -= amount
+      betting.pot += amount
+      self.bet=amount
+      betting.make_bet(amount)
+    else:
+      print("error")
     return self.money
 
   def addCard(self, card: Card, isKnown: bool = True):
