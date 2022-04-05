@@ -173,7 +173,7 @@ dealer1.dealCards(4, [player3], deck1)
 dealer1.printAllPlayerCards_test(players2)
 
 """
-
+"""
 # SPRINT 3 CODE
 def findCardMatch():
   
@@ -197,5 +197,14 @@ def findCardMatch():
     if PrintList == PrintList2:
       print("Match!")
   
+"""
+
+
+#Sprint 4 code
+
+def noCardsLeftFunction():
+  for i in PlayerList:
+    if i.hand == []:
+      print("Player" + i + "has no cards left.")
 
 
