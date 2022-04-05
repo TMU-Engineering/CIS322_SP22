@@ -298,3 +298,11 @@ def findCardMatch():
     print("Player 2 hand: ", PrintList2)
     if PrintList == PrintList2:
       print("Match!")
+  
+
+def noCardsLeftFunction():
+  for i in PlayerList:
+    if i.hand == []:
+      print("Player" + i + "has no cards left.")
+
+
