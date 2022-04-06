@@ -6,10 +6,10 @@ sampleDeck = Deck()
 sampleeightCard = sampleDeck.findCard(8, "Spades", True)
 
 
-def test_eightCard(card1):
-    newSuit = card1.eightCard()
+def test_eightCard():
+    newSuit = sampleeightCard.eightCard("Spades")
     print("The new suit for the stack is: " + newSuit)
 
 #set suit for the rest of the game as newSuit
 
-test_eightCard(sampleeightCard)
+test_eightCard()
