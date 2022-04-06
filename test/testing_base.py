@@ -1,7 +1,8 @@
-import os
 import sys
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append("C:/Users/joann/Desktop/Code/CIS322_SP22")
 from source.CardGames import *
-
+ 
+ 
+ 
 

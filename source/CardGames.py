@@ -36,6 +36,14 @@ class Card:
     if self.value > 10:
       self.value = 10
     return self.value
+  
+  def eightCard(self):
+    if self.value == 8:
+      suit = input("What is the new suit? Options: Clubs, Hearts, Diamonds, Spades\n")
+      while suit not in {"Clubs", "Hearts", "Diamonds", "Spades"}:
+        print("Invalid input. Please enter new suit.")
+        suit = input("Options: Clubs, Hearts, Diamonds, Spades\n")
+    return suit
 
 CardList = List[Card]
 
