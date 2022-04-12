@@ -21,17 +21,17 @@ class PokerGameSetup:
         #   Option to have each player start with the same amount of money,
         #   or with various amounts of money.
         try:
-            Same = input('''Enter "Same" if each player starts with the same amount.
-Enter "Different" if each player start with different amounts: ''')
+            Same = str(input('''Enter "Same" if each player starts with the same amount.
+Enter "Different" if each player start with different amounts: '''))
 
             #   Each player starts with the same amount.
-            if Same == "Same" or Same == "same" or Same == "SAME" or Same == "S" or Same == "s":
+            if Same.lower() == "same" or Same.lower() == "s":
                 Amount = int(input('No cents! Enter amount: $'))
                 for player in PlayerList:
                     Player.addMoney(self, amount)
 
             #   Each player starts with different amounts.
-            elif Same == "Different" or Same == "different" or Same == "DIFFERENT" or Same == "D" or Same == "d":
+            elif Same.lower() == "different" or Same.lower() == "d":
                 for player in PlayerList:
                     Amount = int(input('No cents! Enter amount: $'))
                     Player.addMoney(self, amount)
@@ -77,11 +77,11 @@ class PokerGameRounds:
     def startRound(self):
 
         #   Shuffle deck!
-        Deck.shuffle(self)
+        Deck.shuffle()
 
         #   Cuts
         print('Cutting')
-        Deck.shuffle(self)
+        Deck.shuffle()
 
         #   Deal cards!
         Dealer.dealCards(2, PlayerList, deck)
@@ -109,34 +109,34 @@ class PokerGameRounds:
             Dealer.printPlayerCards(self)
 
             # Player's move!
-            Move = input('''Enter "Check" to Pass.
+            Move = str(input('''Enter "Check" to Pass.
 Enter "Call" to Match.
 Enter "Raise" to Raise.
 Enter "All In" to Raise all in.
-Enter "Fold" to Fold.''')
+Enter "Fold" to Fold.'''))
 
             #   Player Checks!
-            if Move == "Check" or Move == "CHECK" or Move == "check":
+            if Move.lower() == "check" or Move.lower() == "c":
                 #   Call Check Function.
                 PokerPlayer.Check()
 
             #   Player Calls!
-            elif Move == "Call" or Move == "CALL" or Move == "call":
+            elif Move.lower() == "call":
                 #   Call Call Function.
                 PokerPlayer.Call()
 
             #   Player Raises!
-            elif Move == "Raise" or Move == "RAISE" or Move == "raise":
+            elif Move.lower() == "raise" or Move.lower() == "r":
                 #   Call Raise Function.
                 PokerPlayer.Raise()
 
             #   Player is All In!
-            if Move == "All In" or Move == "ALLIN" or Move == "ALL IN" or Move == "All in" or Move == "all In" or Move == "all in" or Move == "allin":
+            if Move.lower() == "all in" or Move.lower() == "allin" or Move.lower() == "a" or Move.lower() == "i":
                 #   Call Check Function.
                 PokerPlayer.Check()
 
             #   Player Folds!
-            elif Move == "Fold" or Move == "fold":
+            elif Move.lower() == "fold" or Move.lower() == "f":
                 #   Call Fold Function.
                 PokerPlayer.Fold()
 
@@ -188,15 +188,15 @@ Automatic Fold!''')
 
     def playFirstRound(self):
         #   First Round of a Game.
-        PokerGameSetup.Blinds(self)
-        PokerGameRounds.startRound(self)
-        PokerGameRounds.initialRiver(self)
-        PokerGameRounds.blindBets(self)
+        self.Blinds(self)
+        self.startRound(self)
+        self.initialRiver(self)
+        self.blindBets(self)
 
     def playRound(self):
         #   A normal Round of a game.
-        PokerGameRounds.addCardToRiver(self)
-        PokerGameRounds.normalBets(self)
+        self.addCardToRiver(self)
+        self.normalBets(self)
 
 class PokerGameRoundsWinEvaluation:
 
@@ -302,19 +302,19 @@ class PokerGameRoundsWinEvaluation:
 
     def evaluatePlayerHand(self):
         for players in PlayersPlayingRoundList:
-            PokerGameRoundsWinEvaluation.threeOfAKind(self, value)
+            self.threeOfAKind(self, value)
             if yes == True:
                 players = win.append(4)
                 break
-            PokerGameRoundsWinEvaluation.get2Pairs(self, value)
+            self.get2Pairs(self, value)
             if yes == True:
                 players = win.append(3)
                 break
-            PokerGameRoundsWinEvaluation.getPairs(self, value)
+            self.getPairs(self, value)
             if yes == True:
                 players = win.append(2)
                 break
-            PokerGameRoundsWinEvaluation.highCard(self, value)
+            self.highCard(self, value)
             if yes == True:
                 players = win.append(1)
 
