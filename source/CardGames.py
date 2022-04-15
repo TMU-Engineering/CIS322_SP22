@@ -90,6 +90,8 @@ class Player:
     self.hand = []
     self.knownCards = []
     self.money = money
+    self.bet=0
+    
   def addMoney(self, amount: int):
     self.money += amount
     return self.money
@@ -99,6 +101,8 @@ class Player:
       print("%s does not have enough money to make this bet." % self.name)
       return self.money
     self.money -= amount
+    self.bet=amount
+    betting.make_bet(amount)
     return self.money
 
   def addCard(self, card: Card, isKnown: bool = True):
@@ -138,7 +142,7 @@ class Player:
 
     return pairList
 
-PlayerList = List[Player]
+PlayerList = []
 
 class Dealer:
   def __init__(self):
@@ -198,3 +202,18 @@ class Dealer:
         player.addCard(deck.getCard())
     return True
 
+def Hand_Value(player):
+  hand=player.hand
+  hand_value=0
+  for card in hand:
+    value=card.value
+    if value in [2,3,4,5,6,7,8,9,10]: #If the card is 2, 3, 4, 5, 6, 7, 8, 9, 10, then the card value is it's current value.
+      hand_value=hand_value + value
+    elif value in [11,12,13]: #If the card is a King, Queen, or Jack, then the card value is switched from its current value to 10.
+      hand_value=hand_value + 10
+    else:
+      if hand_value < 11:
+        hand_value=hand_value+11
+      else:
+        hand_value=hand_value+1
+  return hand_value
