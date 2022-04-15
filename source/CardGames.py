@@ -1,6 +1,5 @@
 
-from ast import Break
-from operator import attrgetter
+from logging import root
 import random
 from typing import List
 import os
@@ -134,7 +133,9 @@ class Player:
   def addCard(self, card: Card, isKnown: bool = True):
     self.hand.append(card)
     if isKnown:
-      self.knownCards.append(card)
+      self.knownCards.append(True)
+    else:
+      self.knownCards.append(False)
 
   def clearHand(self):
     self.hand = []
@@ -297,3 +298,11 @@ def findCardMatch():
     print("Player 2 hand: ", PrintList2)
     if PrintList == PrintList2:
       print("Match!")
+  
+
+def noCardsLeftFunction():
+  for i in PlayerList:
+    if i.hand == []:
+      print("Player" + i + "has no cards left.")
+
+
