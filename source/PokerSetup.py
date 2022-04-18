@@ -1,8 +1,8 @@
 #   Code still needs to incorporate a pot.
 
-from source.CardGames import *
+from CardGames import *
 import sys
-
+from Betting_Class import *
 PlayersStillInGameList = PlayerList
 BlindsList = PlayersStillInGameList
 PlayersPlayingRoundList = PlayersStillInGameList
@@ -60,12 +60,12 @@ Must be an EVEN number greater than 0: $'''))
 
         return Big_Blind
 
-    def Blinds(self):
-        #   Determines who is Big_Blind and who is Small_Blind.
-        #   Made a BlindsList to keep track.
-        #   BlindList will need to delete all players no longer playing.
-        #   Made a PlayersOutOfGameList, just keep the BlindList updated every time by deleting from PlayersOutOfGameList.
-        pass
+    def Blinds(self, playeringamelist, round):
+        Dealer = playeringamelist[round]
+        Small_Blind = playeringamelist[round+1]
+        Big_Blind = playeringamelist[round+2]
+        BlindsList = [Small_Blind,Big_Blind] #This will be who we make start with certain bets
+        return BlindsList
 
 class PokerGameRounds:
 
@@ -92,8 +92,6 @@ class PokerGameRounds:
         pass
 
     def blindBets(self):
-        #   First round of betting incorporating Big_Blind and Small Blind.
-        #   Made a BlindsList to keep track.
         pass
 
     def normalBets(self):
@@ -186,12 +184,16 @@ Automatic Fold!''')
         #   Made a river list.
         pass
 
-    def playFirstRound(self):
+    def playFirstRound(self, game):
         #   First Round of a Game.
-        self.Blinds(self)
+        self.Blinds(self,PlayersStillInGameList, game)
         self.startRound(self)
         self.initialRiver(self)
         self.blindBets(self)
+        game+=1
+        if game >= len(PlayersStillInGameList):
+            game = 0
+
 
     def playRound(self):
         #   A normal Round of a game.
@@ -329,9 +331,10 @@ class PokerGameRoundsWinEvaluation:
         #   Evaluates winner of the game round.
         pass
 
-    def playGameRound(self):
+    def playGameRound(self, game):
         #   One Game
-        PokerGameRounds.playFirstRound(self)
+        
+        PokerGameRounds.playFirstRound(self, game)
 
         for i in range(2):
             PokerGameRounds.playRound(self)
@@ -340,5 +343,6 @@ class PokerGameRoundsWinEvaluation:
         winRoundEvaluation(self)
 
     def playEntireGame(self):
+        game = 0
         while len(PlayersStillInGameList) > 1:
-            playGameRound(self)
+            playGameRound(self, game)
