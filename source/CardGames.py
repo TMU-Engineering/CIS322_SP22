@@ -37,6 +37,16 @@ class Card:
       self.value = 10
     return self.value
 
+  def __str__(self):
+      return str(self.value) + ' of ' + str(self.suit)
+
+  def __repr__(self):
+    return str(self)
+
+
+
+
+
 CardList = List[Card]
 
 class Deck:
@@ -200,6 +210,45 @@ class Player:
 
           break
 
+  def cheatBet(self, currentCardValue):
+    optionsChosen = []
+    currentInput = None
+    
+    for i in range(len(self.hand)):
+      print('Option ' + str(i+1) + ':', self.hand[i])
+    
+    while True: 
+      try:
+        currentInput = int(input("What option would you like to select? (Type 0 to finalize): "))
+        
+        if currentInput == 0 and len(optionsChosen) == 0:
+          print("You must bet atleast one card!")
+          pass
+
+        elif currentInput == 0:
+          break
+
+        elif currentInput > len(self.hand) or currentInput < 0:
+          print("Error, option is invalid. Choose an option listed")
+          pass
+
+        else:
+          optionsChosen.append(currentInput-1)
+          
+      except ValueError:
+        print("Please enter an integer value.")
+        pass
+
+        
+    outputList = []
+
+    for i in optionsChosen:
+      outputList.append(self.hand.pop(i))
+
+    
+    print("Player", str(self.name), "has claimed to place", len(optionsChosen), str(currentCardValue) + "'s")
+    #print(outputList)
+    return outputList
 
 
 
@@ -263,7 +312,9 @@ class Dealer:
   
 
 def findHighCard(CardList):
-    return max(CardList, key=attrgetter('value'))
+    #Fixed max function to account for suit
+
+  return max(CardList, key=attrgetter('value', 'suit'))
 
 
 def findCardMatch(): 
@@ -286,3 +337,5 @@ def findCardMatch():
     print("Player 2 hand: ", PrintList2)
     if PrintList == PrintList2:
       print("Match!")
+
+  
