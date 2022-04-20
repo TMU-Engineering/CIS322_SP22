@@ -3,43 +3,61 @@ import CardGames
 
 
 def findFullHouse(player, river):
+    tempHand = []
     tempHand = player.hand + river.hand
     handValues = []
-
-    #/////////ThreeOfAKind////////
-    three = (False, 0)
-    for i in tempHand:
-        #print(f"i-Value: {i.value}")
-        cardCount = 0
-        handValues.append(i.value)
-        for x in tempHand:
-            if x != i:
-                if x.value == i.value:
-                    cardCount += 1
-        print(f"cardCount(forThree): {cardCount}, for card: {i.value}")
-        if cardCount == 2 or cardCount == 3:
-            three = (True, x.value-1)
-
-
-    #/////////TwoOfAKind//////////
-    two = (False, 0)
-    for y in tempHand:
-        #print(f"y-Value: {y.value}")
-        twoCardCount = 0
-        if y.value-1 != three[1]:
+    twoHandValues = []
+    hasThree = False
+    threeValue = 0
+    for x in tempHand:
+        counter = 1
+        for y in tempHand:
+            if y != x and y.value == x.value:
+                counter+=1
+        if counter == 3 or counter == 4:
+            hasThree = True
+            for card in tempHand:
+                if card.value == x.value:
+                    tempHand.remove(card)
+            threeValue = x.value
             
-            for x in tempHand:
-                if x != y:
-                 if x.value == y.value:
-                    twoCardCount += 1
-        print(f"cardCount(forThree): {cardCount}, for card: {y.value}")
-        if twoCardCount == 1 or twoCardCount == 2:
-            two = (True, x.value-1)
-    
-    if two == True and three == True:
-        return(True, three[1], two[1])
-    
+            break
+        
 
 
-    print(f"Hand:{handValues}")
-    return (False, 0, 0)
+    for value in tempHand:
+        handValues.append(value.value)
+
+
+    hasTwo = False
+    twoValue = 0
+    for a in tempHand:
+        twoCounter = 1
+        for b in tempHand:
+            if b != a and b.value == a.value:
+                twoCounter+=1
+        if twoCounter == 2 or twoCounter == 3:
+            hasTwo = True
+            for card in tempHand:
+                if card.value == a.value:
+                    tempHand.remove(card)
+            twoValue = a.value
+
+            break
+        
+
+    if hasThree == True and hasTwo == True:
+        return True
+    
+    for value in tempHand:
+        twoHandValues.append(value.value)
+
+#    print(f"hasThree: {hasThree}")
+#    print(f"threeValue: {threeValue}")
+#    print(f"tempHand: {handValues}")
+#    print(f"hasTwo: {hasTwo}")
+#    print(f"twoValue: {twoValue}")
+#    print(f"2ndtempHand: {twoHandValues}")
+    return False#hasThree, threeValue, hasTwo, twoValue)
+
+        
