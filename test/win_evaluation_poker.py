@@ -15,30 +15,29 @@ class win_evaluation_poker:
         self.players=playerlist
         self.river=river
         self.betting=betting
-       # self.function=function
 
     def find_hand_values(self, playerlist, river):
         #for every player, check to see if they have
         for i in playerlist:
             
-            #high=highCard(i, river)
-            #pair=getpair(i, river)
-            #two=get2pair(i, river)
-            #three=threeofAKind(i, river)
+            high=highCard(i, river)
+            pair=getPairs(i, river)
+            two=get2Pairs(i, river)
+            three=threeOfAKind(i, river)
             flush=find_flush(i, river)
             four=findFour(i, river)
             full_house=findFullHouse(i, river)
             Straight=straight(i, river)
             Straight_flush=straight_flush(i, river)
             # set the player hand_value to the highest type of hand
-#            if high[0] == True:
- #               i.hand_value=(9, high[1])
-  #          elif pair[0] == True:
-   #             i.hand_value=(8, pair[1])
-    #        elif two[0] == True:
-     #           i.hand_value=(7, two[1])
-      #      elif three[0] == True:
-       #         i.hand_vaule=(6, three[1])
+            if high[0] == True:
+                i.hand_value=(9, high[1])
+            elif pair[0] == True:
+                i.hand_value=(8, pair[1])
+            elif two[0] == True:
+                i.hand_value=(7, two[1])
+            elif three[0] == True:
+                i.hand_vaule=(6, three[1])
             if Straight[0] == True:
                 i.hand_value=(5, Straight[1])
             elif flush[0] == True:
