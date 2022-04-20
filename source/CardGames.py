@@ -1,6 +1,7 @@
 
 from logging import root
 import random
+from tabnanny import check
 from typing import List
 import os
 
@@ -92,6 +93,20 @@ class Deck:
         foundCard = self.cards.pop(idx) if remove else card
         break
     return foundCard
+
+  def checkBluff(self, val: int, iterations: int, currentlist):
+    checkedBluff = None
+    number = 0
+    for card in currentlist:
+      if card.value == val:
+        number += 1
+    if number == iterations:
+      checkedBluff = False
+    else:
+      checkedBluff = True
+
+    return checkedBluff
+        
 
   def shuffle(self):
     random.shuffle(self.cards)
